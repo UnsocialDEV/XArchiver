@@ -1,0 +1,783 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, ...</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, ...</value>
+  </resheader>
+  <data name="AppTitle" xml:space="preserve">
+    <value>XArchiver</value>
+  </data>
+  <data name="DialogCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="DialogCredentialDescription" xml:space="preserve">
+    <value>Enter the X Bearer Token required before any archive sync starts.</value>
+  </data>
+  <data name="DialogCredentialPlaceholder" xml:space="preserve">
+    <value>Paste your Bearer Token</value>
+  </data>
+  <data name="DialogCredentialPrimary" xml:space="preserve">
+    <value>Save token</value>
+  </data>
+  <data name="DialogCredentialTitle" xml:space="preserve">
+    <value>X API credential</value>
+  </data>
+  <data name="DialogDeleteMessageFormat" xml:space="preserve">
+    <value>Delete the archive profile for @{0}?</value>
+  </data>
+  <data name="DialogDeletePrimary" xml:space="preserve">
+    <value>Delete profile</value>
+  </data>
+  <data name="DialogDeleteTitle" xml:space="preserve">
+    <value>Delete archive profile</value>
+  </data>
+  <data name="DialogSyncMediaImages" xml:space="preserve">
+    <value>images</value>
+  </data>
+  <data name="DialogSyncMediaNone" xml:space="preserve">
+    <value>none</value>
+  </data>
+  <data name="DialogSyncMediaVideos" xml:space="preserve">
+    <value>videos</value>
+  </data>
+  <data name="DialogSyncPostTypeOriginal" xml:space="preserve">
+    <value>original posts</value>
+  </data>
+  <data name="DialogSyncPostTypeQuotes" xml:space="preserve">
+    <value>quote posts</value>
+  </data>
+  <data name="DialogSyncPostTypeReplies" xml:space="preserve">
+    <value>replies</value>
+  </data>
+  <data name="DialogSyncPostTypeReposts" xml:space="preserve">
+    <value>reposts</value>
+  </data>
+  <data name="DialogSyncPrimary" xml:space="preserve">
+    <value>Queue sync</value>
+  </data>
+  <data name="DialogSyncSummaryEstimatedCostFormat" xml:space="preserve">
+    <value>Estimated cost: about ${0} baseline for {1} post reads, up to about ${2} if X scans extra timeline pages ({3} post reads).</value>
+  </data>
+  <data name="DialogSyncSummaryEstimatedRateFormat" xml:space="preserve">
+    <value>Estimate basis: ${0} per 1,000 X post reads.</value>
+  </data>
+  <data name="DialogSyncSummaryApiCallsNote" xml:space="preserve">
+    <value>This sync will make 1 user lookup and 1 or more timeline requests to X.</value>
+  </data>
+  <data name="DialogSyncSummaryFolderFormat" xml:space="preserve">
+    <value>Archive folder: {0}</value>
+  </data>
+  <data name="DialogSyncSummaryMaxPostsFormat" xml:space="preserve">
+    <value>Archive target: up to {0} posts</value>
+  </data>
+  <data name="DialogSyncSummaryMediaFormat" xml:space="preserve">
+    <value>Media downloads: {0}</value>
+  </data>
+  <data name="DialogSyncSummaryMediaNote" xml:space="preserve">
+    <value>Media downloads happen after post lookups and may add network traffic, but they are separate from X timeline API requests.</value>
+  </data>
+  <data name="DialogSyncSummaryModeIncremental" xml:space="preserve">
+    <value>Sync mode: incremental. Only newer posts since the last successful sync will be requested when possible.</value>
+  </data>
+  <data name="DialogSyncSummaryModeInitial" xml:space="preserve">
+    <value>Sync mode: initial archive. X may need to scan multiple timeline pages to find matching posts.</value>
+  </data>
+  <data name="DialogSyncSummaryPostTypesFormat" xml:space="preserve">
+    <value>Post types: {0}</value>
+  </data>
+  <data name="DialogSyncSummaryUsageNote" xml:space="preserve">
+    <value>X bills usage by API reads and post consumption, not by the number of files saved locally.</value>
+  </data>
+  <data name="DialogSyncSummaryQueueNote" xml:space="preserve">
+    <value>This request enters the Syncs queue. It starts immediately when no other sync is running.</value>
+  </data>
+  <data name="DialogSyncSummaryUsernameFormat" xml:space="preserve">
+    <value>Username: @{0}</value>
+  </data>
+  <data name="DialogSyncTitle" xml:space="preserve">
+    <value>Confirm archive sync</value>
+  </data>
+  <data name="DialogReviewArchiveConfirmationFormat" xml:space="preserve">
+    <value>Archive {0} selected posts? Estimated archive cost is about ${1} baseline and up to about ${2} based on the review reads needed to find them.</value>
+  </data>
+  <data name="DialogReviewArchivePrimary" xml:space="preserve">
+    <value>Archive selected</value>
+  </data>
+  <data name="DialogReviewArchiveTitle" xml:space="preserve">
+    <value>Confirm selected archive</value>
+  </data>
+  <data name="DialogReviewLoadConfirmationFormat" xml:space="preserve">
+    <value>Load the latest review page for @{0}? Estimated preview read cost is about ${1} baseline and up to about ${2} if extra timeline scanning is needed.</value>
+  </data>
+  <data name="DialogReviewLoadMoreConfirmationFormat" xml:space="preserve">
+    <value>Load the next review page for @{0}? Estimated preview read cost is about ${1} baseline and up to about ${2} if extra timeline scanning is needed.</value>
+  </data>
+  <data name="DialogReviewLoadPrimary" xml:space="preserve">
+    <value>Load posts</value>
+  </data>
+  <data name="DialogReviewLoadTitle" xml:space="preserve">
+    <value>Confirm review load</value>
+  </data>
+  <data name="HomePageCredentialStatusHeader.Text" xml:space="preserve">
+    <value>X API access</value>
+  </data>
+  <data name="HomePageHowItWorksHeader.Text" xml:space="preserve">
+    <value>How it works</value>
+  </data>
+  <data name="HomePageOpenProfilesButton.Content" xml:space="preserve">
+    <value>Open Profiles</value>
+  </data>
+  <data name="HomePageOpenScraperButton.Content" xml:space="preserve">
+    <value>Open Scraper</value>
+  </data>
+  <data name="HomePageOpenSettingsButton.Content" xml:space="preserve">
+    <value>Open Settings</value>
+  </data>
+  <data name="HomePageOpenSyncsButton.Content" xml:space="preserve">
+    <value>Open Syncs</value>
+  </data>
+  <data name="HomePageOpenViewerButton.Content" xml:space="preserve">
+    <value>Open Viewer</value>
+  </data>
+  <data name="HomePageProfilesStatusHeader.Text" xml:space="preserve">
+    <value>Saved profiles</value>
+  </data>
+  <data name="HomePageQuickActionsHeader.Text" xml:space="preserve">
+    <value>Quick actions</value>
+  </data>
+  <data name="HomePageScraperStatusHeader.Text" xml:space="preserve">
+    <value>Scraper session</value>
+  </data>
+  <data name="HomePageStep1Body.Text" xml:space="preserve">
+    <value>Open Settings and save your X Bearer Token if you plan to archive with the API path.</value>
+  </data>
+  <data name="HomePageStep1Header.Text" xml:space="preserve">
+    <value>1. Configure access</value>
+  </data>
+  <data name="HomePageStep2Body.Text" xml:space="preserve">
+    <value>Use Profiles for API-based archiving, or use Scraper when you want a browser-based capture flow.</value>
+  </data>
+  <data name="HomePageStep2Header.Text" xml:space="preserve">
+    <value>2. Choose an archive method</value>
+  </data>
+  <data name="HomePageStep3Body.Text" xml:space="preserve">
+    <value>Run sync, manual review, or a scraper session to collect post text, images, videos, and metadata into your local archive folder.</value>
+  </data>
+  <data name="HomePageStep3Header.Text" xml:space="preserve">
+    <value>3. Archive content</value>
+  </data>
+  <data name="HomePageStep4Body.Text" xml:space="preserve">
+    <value>Open Viewer to search archived posts, inspect metadata, and browse downloaded media in the app.</value>
+  </data>
+  <data name="HomePageStep4Header.Text" xml:space="preserve">
+    <value>4. Browse the archive</value>
+  </data>
+  <data name="HomePageStorageNote.Text" xml:space="preserve">
+    <value>Everything the app archives is stored locally in your chosen folder, with text, images, videos, metadata, and the viewer index kept together for later browsing.</value>
+  </data>
+  <data name="HomePageSubtitle.Text" xml:space="preserve">
+    <value>XArchiver saves public X posts, images, videos, and metadata so you can archive accounts with the X API or with the built-in web scraper.</value>
+  </data>
+  <data name="HomePageSyncsStatusHeader.Text" xml:space="preserve">
+    <value>Sync activity</value>
+  </data>
+  <data name="HomePageTabProfilesBody.Text" xml:space="preserve">
+    <value>Create and edit API archive profiles, choose archive folders, and control which post types and media should be saved.</value>
+  </data>
+  <data name="HomePageTabProfilesHeader.Text" xml:space="preserve">
+    <value>Profiles</value>
+  </data>
+  <data name="HomePageTabReviewBody.Text" xml:space="preserve">
+    <value>Load recent posts for a saved profile, manually choose specific posts, and archive only the ones you want.</value>
+  </data>
+  <data name="HomePageTabReviewHeader.Text" xml:space="preserve">
+    <value>Review</value>
+  </data>
+  <data name="HomePageTabScraperBody.Text" xml:space="preserve">
+    <value>Use the browser-based fallback archiver for profile URLs when you want to scrape directly from the live website instead of the API.</value>
+  </data>
+  <data name="HomePageTabScraperHeader.Text" xml:space="preserve">
+    <value>Scraper</value>
+  </data>
+  <data name="HomePageTabSettingsBody.Text" xml:space="preserve">
+    <value>Manage the X API credential and app-wide settings used for sync, review, and cost estimates.</value>
+  </data>
+  <data name="HomePageTabSettingsHeader.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="HomePageTabSyncsBody.Text" xml:space="preserve">
+    <value>Track queued and running sync sessions, watch progress, and pause, restart, or stop archive jobs.</value>
+  </data>
+  <data name="HomePageTabSyncsHeader.Text" xml:space="preserve">
+    <value>Syncs</value>
+  </data>
+  <data name="HomePageTabViewerBody.Text" xml:space="preserve">
+    <value>Search archived posts, inspect overview and metadata details, and view downloaded media inside the app.</value>
+  </data>
+  <data name="HomePageTabViewerHeader.Text" xml:space="preserve">
+    <value>Viewer</value>
+  </data>
+  <data name="HomePageTabsHeader.Text" xml:space="preserve">
+    <value>What each tab does</value>
+  </data>
+  <data name="HomePageTitle.Text" xml:space="preserve">
+    <value>Welcome to XArchiver</value>
+  </data>
+  <data name="HomeStatusCredentialMissing" xml:space="preserve">
+    <value>No X API token saved yet.</value>
+  </data>
+  <data name="HomeStatusCredentialReady" xml:space="preserve">
+    <value>X API token is saved and ready for sync or review.</value>
+  </data>
+  <data name="HomeStatusProfilesFormat" xml:space="preserve">
+    <value>{0} archive profiles saved.</value>
+  </data>
+  <data name="HomeStatusScraperMissing" xml:space="preserve">
+    <value>No dedicated scraper browser session is set up yet.</value>
+  </data>
+  <data name="HomeStatusScraperPendingFormat" xml:space="preserve">
+    <value>Dedicated scraper browser session using {0} exists, but login is not validated yet.</value>
+  </data>
+  <data name="HomeStatusScraperReadyFormat" xml:space="preserve">
+    <value>Dedicated scraper browser session using {0} is ready.</value>
+  </data>
+  <data name="HomeStatusSyncsFormat" xml:space="preserve">
+    <value>{0} running, {1} queued, {2} paused.</value>
+  </data>
+  <data name="HomeStatusSyncsIdle" xml:space="preserve">
+    <value>No active or queued sync sessions right now.</value>
+  </data>
+  <data name="MainWindowHomeNav.Content" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="MainWindowProfilesNav.Content" xml:space="preserve">
+    <value>Profiles</value>
+  </data>
+  <data name="MainWindowReviewNav.Content" xml:space="preserve">
+    <value>Review</value>
+  </data>
+  <data name="MainWindowScraperNav.Content" xml:space="preserve">
+    <value>Scraper</value>
+  </data>
+  <data name="MainWindowSyncsNav.Content" xml:space="preserve">
+    <value>Syncs</value>
+  </data>
+  <data name="MainWindowViewerNav.Content" xml:space="preserve">
+    <value>Viewer</value>
+  </data>
+  <data name="MetricsSummaryFormat" xml:space="preserve">
+    <value>Likes {0}   Replies {1}   Reposts {2}   Quotes {3}</value>
+  </data>
+  <data name="PostTypeOriginal" xml:space="preserve">
+    <value>Original post</value>
+  </data>
+  <data name="PostTypeQuote" xml:space="preserve">
+    <value>Quote post</value>
+  </data>
+  <data name="PostTypeReply" xml:space="preserve">
+    <value>Reply</value>
+  </data>
+  <data name="PostTypeRepost" xml:space="preserve">
+    <value>Repost</value>
+  </data>
+  <data name="ProfilesPageAddButton.Content" xml:space="preserve">
+    <value>New profile</value>
+  </data>
+  <data name="ProfilesPageArchiveFolderLabel.Text" xml:space="preserve">
+    <value>Archive folder</value>
+  </data>
+  <data name="ProfilesPageBrowseButton.Content" xml:space="preserve">
+    <value>Browse</value>
+  </data>
+  <data name="ProfilesPageClearCredentialButton.Content" xml:space="preserve">
+    <value>Remove token</value>
+  </data>
+  <data name="ProfilesPageCredentialDescription.Text" xml:space="preserve">
+    <value>The app stores your token in Windows Credential Locker and blocks sync until one is available.</value>
+  </data>
+  <data name="ProfilesPageCredentialHeader.Text" xml:space="preserve">
+    <value>X API credential</value>
+  </data>
+  <data name="ProfilesPageDeleteButton.Content" xml:space="preserve">
+    <value>Delete profile</value>
+  </data>
+  <data name="ProfilesPageEstimatedRateDescription.Text" xml:space="preserve">
+    <value>Used only for the pre-sync estimate. Defaulted to your current observed average from the X usage dashboard and can be adjusted any time.</value>
+  </data>
+  <data name="ProfilesPageEstimatedRateLabel.Text" xml:space="preserve">
+    <value>Estimated rate ($ per 1,000 post reads)</value>
+  </data>
+  <data name="ProfilesPageEditorHeader.Text" xml:space="preserve">
+    <value>Archive settings</value>
+  </data>
+  <data name="ProfilesPageImagesToggle.Content" xml:space="preserve">
+    <value>Download images</value>
+  </data>
+  <data name="ProfilesPageImportActionButton.Content" xml:space="preserve">
+    <value>Load Profiles</value>
+  </data>
+  <data name="ProfilesPageManageCredentialButton.Content" xml:space="preserve">
+    <value>Save or replace token</value>
+  </data>
+  <data name="ProfilesPageMaxPostsLabel.Text" xml:space="preserve">
+    <value>Max posts per sync</value>
+  </data>
+  <data name="ProfilesPageMediaLabel.Text" xml:space="preserve">
+    <value>Media downloads</value>
+  </data>
+  <data name="ProfilesPageOriginalPostsToggle.Content" xml:space="preserve">
+    <value>Original posts</value>
+  </data>
+  <data name="ProfilesPagePostTypesLabel.Text" xml:space="preserve">
+    <value>Post types</value>
+  </data>
+  <data name="ProfilesPageProfilesHeader.Text" xml:space="preserve">
+    <value>Profiles</value>
+  </data>
+  <data name="ProfilesPageQuotesToggle.Content" xml:space="preserve">
+    <value>Quote posts</value>
+  </data>
+  <data name="ProfilesPageRepliesToggle.Content" xml:space="preserve">
+    <value>Replies</value>
+  </data>
+  <data name="ProfilesPageRepostsToggle.Content" xml:space="preserve">
+    <value>Reposts</value>
+  </data>
+  <data name="ProfilesPageSaveButton.Content" xml:space="preserve">
+    <value>Save profile</value>
+  </data>
+  <data name="ProfilesPageReviewButton.Content" xml:space="preserve">
+    <value>Review posts</value>
+  </data>
+  <data name="ProfilesPageSubtitle.Text" xml:space="preserve">
+    <value>Choose which public X account to archive, what content to keep, and where to store it.</value>
+  </data>
+  <data name="ProfilesPageSyncButton.Content" xml:space="preserve">
+    <value>Run sync</value>
+  </data>
+  <data name="ProfilesPageTitle.Text" xml:space="preserve">
+    <value>Archive Profiles</value>
+  </data>
+  <data name="ProfilesPageUsernameLabel.Text" xml:space="preserve">
+    <value>X username</value>
+  </data>
+  <data name="ProfilesPageVideosToggle.Content" xml:space="preserve">
+    <value>Download videos</value>
+  </data>
+  <data name="StatusCredentialAvailable" xml:space="preserve">
+    <value>Bearer Token saved and ready for sync.</value>
+  </data>
+  <data name="StatusEstimatedRateValidationFormat" xml:space="preserve">
+    <value>Estimated rate must be between {0} and {1}.</value>
+  </data>
+  <data name="StatusCredentialMissing" xml:space="preserve">
+    <value>No Bearer Token saved yet.</value>
+  </data>
+  <data name="StatusProfileDeleted" xml:space="preserve">
+    <value>Archive profile deleted.</value>
+  </data>
+  <data name="StatusProfileSaved" xml:space="preserve">
+    <value>Archive profile saved.</value>
+  </data>
+  <data name="StatusImportArchivesSummaryFormat" xml:space="preserve">
+    <value>Imported {0} archives, updated {1} existing profiles, skipped {2} invalid candidates, and skipped {3} duplicate matches.</value>
+  </data>
+  <data name="StatusProfileValidationFolder" xml:space="preserve">
+    <value>Select an archive folder before saving.</value>
+  </data>
+  <data name="StatusProfileValidationMaxPostsFormat" xml:space="preserve">
+    <value>Max posts per sync must be between {0} and {1}.</value>
+  </data>
+  <data name="StatusProfileValidationPostTypes" xml:space="preserve">
+    <value>Select at least one post type to archive.</value>
+  </data>
+  <data name="StatusProfileValidationUsername" xml:space="preserve">
+    <value>Enter the X username to archive.</value>
+  </data>
+  <data name="StatusReviewArchiveSuccessFormat" xml:space="preserve">
+    <value>Archived {0} selected posts, {1} images, and {2} videos. Skipped {3} already archived posts.</value>
+  </data>
+  <data name="StatusReviewLoadedFormat" xml:space="preserve">
+    <value>Loaded {0} posts for review after scanning {1} post reads.</value>
+  </data>
+  <data name="StatusReviewNoProfile" xml:space="preserve">
+    <value>Create and save a profile before reviewing posts.</value>
+  </data>
+  <data name="StatusSyncFailureFormat" xml:space="preserve">
+    <value>Archive sync failed: {0}</value>
+  </data>
+  <data name="StatusSyncCanceled" xml:space="preserve">
+    <value>Archive sync canceled.</value>
+  </data>
+  <data name="StatusSyncMissingCredential" xml:space="preserve">
+    <value>Save a Bearer Token before starting archive sync.</value>
+  </data>
+  <data name="StatusSyncQueuedFormat" xml:space="preserve">
+    <value>Queued a sync for @{0}. Open Syncs to track progress.</value>
+  </data>
+  <data name="StatusSyncSuccessFormat" xml:space="preserve">
+    <value>Archived {0} posts, {1} images, and {2} videos.</value>
+  </data>
+  <data name="StatusTokenRemoved" xml:space="preserve">
+    <value>Bearer Token removed.</value>
+  </data>
+  <data name="StatusTokenRequired" xml:space="preserve">
+    <value>Enter a Bearer Token to continue.</value>
+  </data>
+  <data name="StatusTokenSaved" xml:space="preserve">
+    <value>Bearer Token saved securely.</value>
+  </data>
+  <data name="StatusSettingsSaved" xml:space="preserve">
+    <value>Settings saved.</value>
+  </data>
+  <data name="StatusUnexpectedErrorFormat" xml:space="preserve">
+    <value>Unexpected error: {0}</value>
+  </data>
+  <data name="SettingsPageClearCredentialButton.Content" xml:space="preserve">
+    <value>Remove token</value>
+  </data>
+  <data name="SettingsPageCredentialDescription.Text" xml:space="preserve">
+    <value>The app stores your token in Windows Credential Locker and uses it for sync and review requests.</value>
+  </data>
+  <data name="SettingsPageCredentialHeader.Text" xml:space="preserve">
+    <value>X API credential</value>
+  </data>
+  <data name="SettingsPageEstimatedRateDescription.Text" xml:space="preserve">
+    <value>Used for sync and review cost estimates. Adjust it to match your current X usage pricing.</value>
+  </data>
+  <data name="SettingsPageEstimatedRateHeader.Text" xml:space="preserve">
+    <value>Estimated cost rate</value>
+  </data>
+  <data name="SettingsPageManageCredentialButton.Content" xml:space="preserve">
+    <value>Save or replace token</value>
+  </data>
+  <data name="SettingsPageSaveEstimatedRateButton.Content" xml:space="preserve">
+    <value>Save rate</value>
+  </data>
+  <data name="SettingsPageSubtitle.Text" xml:space="preserve">
+    <value>Manage app-wide X API access and cost-estimate settings.</value>
+  </data>
+  <data name="SettingsPageTitle.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="ScraperPageArchiveFolderLabel.Text" xml:space="preserve">
+    <value>Archive folder</value>
+  </data>
+  <data name="ScraperPageBrowseButton.Content" xml:space="preserve">
+    <value>Browse</value>
+  </data>
+  <data name="ScraperPageMaxPostsLabel.Text" xml:space="preserve">
+    <value>Max posts to scrape</value>
+  </data>
+  <data name="ScraperPageProfileUrlLabel.Text" xml:space="preserve">
+    <value>Profile URL</value>
+  </data>
+  <data name="ScraperPageProgressHeader.Text" xml:space="preserve">
+    <value>Scrape progress</value>
+  </data>
+  <data name="ScraperPageSessionDescription.Text" xml:space="preserve">
+    <value>XArchiver uses a dedicated scraper browser session. Open the login browser, sign in to X there, then come back and click "I finished logging in" before scraping.</value>
+  </data>
+  <data name="ScraperPageSessionHeader.Text" xml:space="preserve">
+    <value>Browser session</value>
+  </data>
+  <data name="ScraperPageOpenLoginBrowserButton.Content" xml:space="preserve">
+    <value>Open X login browser</value>
+  </data>
+  <data name="ScraperPageSessionMissing" xml:space="preserve">
+    <value>No dedicated scraper browser session exists yet. Open the X login browser to create one.</value>
+  </data>
+  <data name="ScraperPageSessionPendingFormat" xml:space="preserve">
+    <value>Dedicated scraper session using {0} is open, but login is not validated yet. Finish signing in there, then click "I finished logging in".</value>
+  </data>
+  <data name="ScraperPageSessionReadyFormat" xml:space="preserve">
+    <value>Dedicated scraper session using {0} is ready for scraping.</value>
+  </data>
+  <data name="ScraperPageValidateSessionButton.Content" xml:space="preserve">
+    <value>I finished logging in</value>
+  </data>
+  <data name="ScraperPageResetSessionButton.Content" xml:space="preserve">
+    <value>Reset scraper browser session</value>
+  </data>
+  <data name="ScraperPageStartButton.Content" xml:space="preserve">
+    <value>Start scrape</value>
+  </data>
+  <data name="ScraperPageSubtitle.Text" xml:space="preserve">
+    <value>Archive a public X profile from the live website when you want a browser-based fallback instead of the API.</value>
+  </data>
+  <data name="ScraperPageTitle.Text" xml:space="preserve">
+    <value>Web Scraper Archiver</value>
+  </data>
+  <data name="StatusScraperBrowserOpenedFormat" xml:space="preserve">
+    <value>Opened the dedicated X login browser using {0}. Sign in there, then return here and click "I finished logging in".</value>
+  </data>
+  <data name="StatusScraperFailureFormat" xml:space="preserve">
+    <value>Web scrape failed: {0}</value>
+  </data>
+  <data name="StatusScraperInvalidMaxPosts" xml:space="preserve">
+    <value>Enter a positive max post count before scraping.</value>
+  </data>
+  <data name="StatusScraperInvalidUrl" xml:space="preserve">
+    <value>Enter a valid x.com or twitter.com profile URL.</value>
+  </data>
+  <data name="StatusScraperSignInComplete" xml:space="preserve">
+    <value>Dedicated scraper browser opened.</value>
+  </data>
+  <data name="StatusScraperSignInIncomplete" xml:space="preserve">
+    <value>Open the dedicated scraper browser and finish login before scraping.</value>
+  </data>
+  <data name="StatusScraperSignInRequired" xml:space="preserve">
+    <value>Open and validate the dedicated X browser session before starting a web scrape.</value>
+  </data>
+  <data name="StatusScraperSessionReset" xml:space="preserve">
+    <value>Dedicated scraper browser session reset.</value>
+  </data>
+  <data name="StatusScraperValidationFailure" xml:space="preserve">
+    <value>The dedicated scraper browser session is still not logged in to X. Finish login there, then try again.</value>
+  </data>
+  <data name="StatusScraperValidationSuccessFormat" xml:space="preserve">
+    <value>Validated the dedicated scraper browser session using {0}. Close that browser if it is still open, then start scraping.</value>
+  </data>
+  <data name="StatusScraperSuccessFormat" xml:space="preserve">
+    <value>Saved {0} scraped posts, {1} images, and {2} videos. Open Viewer to browse them.</value>
+  </data>
+  <data name="StatusViewerLoadedFormat" xml:space="preserve">
+    <value>Loaded {0} archived posts.</value>
+  </data>
+  <data name="StatusViewerNoProfile" xml:space="preserve">
+    <value>Create and sync a profile before using the archive viewer.</value>
+  </data>
+  <data name="ViewerMetadataExtendedFormat" xml:space="preserve">
+    <value>Extended metadata schema v{0} loaded for this archived post.</value>
+  </data>
+  <data name="ViewerMetadataLegacy" xml:space="preserve">
+    <value>Extended metadata is unavailable for this older archive. Showing baseline archived fields only.</value>
+  </data>
+  <data name="ViewerMetadataUnavailable" xml:space="preserve">
+    <value>No metadata file is available for this archived post.</value>
+  </data>
+  <data name="ViewerOverviewArchivedAt" xml:space="preserve">
+    <value>Archived at</value>
+  </data>
+  <data name="ViewerOverviewConversationId" xml:space="preserve">
+    <value>Conversation ID</value>
+  </data>
+  <data name="ViewerOverviewCreatedLocal" xml:space="preserve">
+    <value>Created (local)</value>
+  </data>
+  <data name="ViewerOverviewCreatedUtc" xml:space="preserve">
+    <value>Created (UTC)</value>
+  </data>
+  <data name="ViewerOverviewMetadataPath" xml:space="preserve">
+    <value>Metadata file</value>
+  </data>
+  <data name="ViewerOverviewMetrics" xml:space="preserve">
+    <value>Public metrics</value>
+  </data>
+  <data name="ViewerOverviewPostId" xml:space="preserve">
+    <value>Post ID</value>
+  </data>
+  <data name="ViewerOverviewPostType" xml:space="preserve">
+    <value>Post type</value>
+  </data>
+  <data name="ViewerOverviewRawPayload" xml:space="preserve">
+    <value>Raw payload</value>
+  </data>
+  <data name="ViewerOverviewReferences" xml:space="preserve">
+    <value>Referenced posts</value>
+  </data>
+  <data name="ViewerOverviewReplyTarget" xml:space="preserve">
+    <value>Reply target</value>
+  </data>
+  <data name="ViewerOverviewText" xml:space="preserve">
+    <value>Post text</value>
+  </data>
+  <data name="ViewerOverviewTextPath" xml:space="preserve">
+    <value>Text file</value>
+  </data>
+  <data name="ViewerOverviewUserId" xml:space="preserve">
+    <value>User ID</value>
+  </data>
+  <data name="ViewerOverviewUsername" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="ViewerRawPayloadAvailable" xml:space="preserve">
+    <value>Available in the metadata tab raw JSON view.</value>
+  </data>
+  <data name="ViewerResultsSummaryFormat" xml:space="preserve">
+    <value>{0} archived posts in the current result set.</value>
+  </data>
+  <data name="ViewerGalleryResultsSummaryFormat" xml:space="preserve">
+    <value>{0} archived media items in the current result set.</value>
+  </data>
+  <data name="ViewerValueUnavailable" xml:space="preserve">
+    <value>Unavailable</value>
+  </data>
+  <data name="ViewerGalleryHeader.Text" xml:space="preserve">
+    <value>Profile gallery</value>
+  </data>
+  <data name="ViewerMediaHeader.Text" xml:space="preserve">
+    <value>Archived media</value>
+  </data>
+  <data name="ViewerMetadataOpenButton.Content" xml:space="preserve">
+    <value>Open metadata file</value>
+  </data>
+  <data name="ViewerOverlayCloseButton.Content" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="ViewerOverlayNextButton.Content" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="ViewerOverlayPreviousButton.Content" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="ViewerOverviewHeader.Text" xml:space="preserve">
+    <value>Overview</value>
+  </data>
+  <data name="ViewerTabMedia.Header" xml:space="preserve">
+    <value>Media</value>
+  </data>
+  <data name="ViewerTabGallery.Header" xml:space="preserve">
+    <value>Gallery</value>
+  </data>
+  <data name="ViewerTabMetadata.Header" xml:space="preserve">
+    <value>Metadata</value>
+  </data>
+  <data name="ViewerTabOverview.Header" xml:space="preserve">
+    <value>Overview</value>
+  </data>
+  <data name="ViewerPageImagesHeader.Text" xml:space="preserve">
+    <value>Images</value>
+  </data>
+  <data name="ViewerPageTextFilter.Content" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="ViewerPageImagesFilter.Content" xml:space="preserve">
+    <value>Pictures</value>
+  </data>
+  <data name="ViewerPageVideosFilter.Content" xml:space="preserve">
+    <value>Videos</value>
+  </data>
+  <data name="ViewerPageMetricsHeader.Text" xml:space="preserve">
+    <value>Metrics</value>
+  </data>
+  <data name="ViewerPageOriginalFilter.Content" xml:space="preserve">
+    <value>Original posts</value>
+  </data>
+  <data name="ViewerPageProfileLabel.Text" xml:space="preserve">
+    <value>Archive profile</value>
+  </data>
+  <data name="ViewerPageQuotesFilter.Content" xml:space="preserve">
+    <value>Quote posts</value>
+  </data>
+  <data name="ViewerPageRefreshButton.Content" xml:space="preserve">
+    <value>Refresh archive</value>
+  </data>
+  <data name="ViewerPageRefreshButton.Label" xml:space="preserve">
+    <value>Refresh archive</value>
+  </data>
+  <data name="ViewerPageRepliesFilter.Content" xml:space="preserve">
+    <value>Replies</value>
+  </data>
+  <data name="ViewerPageRepostsFilter.Content" xml:space="preserve">
+    <value>Reposts</value>
+  </data>
+  <data name="ViewerPageSearchBox.PlaceholderText" xml:space="preserve">
+    <value>Search archived text</value>
+  </data>
+  <data name="ViewerPageSearchLabel.Text" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="ViewerPageSubtitle.Text" xml:space="preserve">
+    <value>Browse the saved archive, search posts, and preview downloaded media.</value>
+  </data>
+  <data name="ViewerPageTextHeader.Text" xml:space="preserve">
+    <value>Post details</value>
+  </data>
+  <data name="ViewerPageTitle.Text" xml:space="preserve">
+    <value>Archive Viewer</value>
+  </data>
+  <data name="ViewerPageVideosHeader.Text" xml:space="preserve">
+    <value>Videos</value>
+  </data>
+  <data name="ReviewArchivedBadge.Text" xml:space="preserve">
+    <value>Archived</value>
+  </data>
+  <data name="ReviewFilterSummaryFormat" xml:space="preserve">
+    <value>Post types: {0}. Media kept: {1}.</value>
+  </data>
+  <data name="ReviewPageArchiveSelectedButton.Content" xml:space="preserve">
+    <value>Archive selected</value>
+  </data>
+  <data name="ReviewPageClearSelectionButton.Content" xml:space="preserve">
+    <value>Clear selection</value>
+  </data>
+  <data name="ReviewPageDetailsHeader.Text" xml:space="preserve">
+    <value>Review details</value>
+  </data>
+  <data name="ReviewPageEstimateHeader.Text" xml:space="preserve">
+    <value>Estimated preview read cost</value>
+  </data>
+  <data name="ReviewPageFilterHeader.Text" xml:space="preserve">
+    <value>Current archive rules</value>
+  </data>
+  <data name="ReviewPageImagesHeader.Text" xml:space="preserve">
+    <value>Preview images</value>
+  </data>
+  <data name="ReviewPageLoadButton.Content" xml:space="preserve">
+    <value>Load recent posts</value>
+  </data>
+  <data name="ReviewPageLoadMoreButton.Content" xml:space="preserve">
+    <value>Load more</value>
+  </data>
+  <data name="ReviewPageMetricsHeader.Text" xml:space="preserve">
+    <value>Metrics</value>
+  </data>
+  <data name="ReviewPageProfileLabel.Text" xml:space="preserve">
+    <value>Archive profile</value>
+  </data>
+  <data name="SyncsPageEmptyState.Text" xml:space="preserve">
+    <value>No sync sessions are active yet. Start one from Profiles to track it here.</value>
+  </data>
+  <data name="SyncsPageFailedLabel.Text" xml:space="preserve">
+    <value>Completed with errors</value>
+  </data>
+  <data name="SyncsPagePausedLabel.Text" xml:space="preserve">
+    <value>Paused</value>
+  </data>
+  <data name="SyncsPageQueuedLabel.Text" xml:space="preserve">
+    <value>Queued</value>
+  </data>
+  <data name="SyncsPageRunningLabel.Text" xml:space="preserve">
+    <value>Running</value>
+  </data>
+  <data name="SyncsPageSubtitle.Text" xml:space="preserve">
+    <value>Track queued and active syncs, view progress for large archives, and pause, restart, or stop each session.</value>
+  </data>
+  <data name="SyncsPageTitle.Text" xml:space="preserve">
+    <value>Sync Sessions</value>
+  </data>
+  <data name="ReviewPageSelectAllButton.Content" xml:space="preserve">
+    <value>Select all visible</value>
+  </data>
+  <data name="ReviewPageSubtitle.Text" xml:space="preserve">
+    <value>Load recent X posts, review them manually, and archive only the ones you choose.</value>
+  </data>
+  <data name="ReviewPageTitle.Text" xml:space="preserve">
+    <value>Manual Review</value>
+  </data>
+  <data name="ReviewPageVideosHeader.Text" xml:space="preserve">
+    <value>Preview videos</value>
+  </data>
+  <data name="ReviewPreviewEstimateFormat" xml:space="preserve">
+    <value>About ${0} baseline for the next review load, up to about ${1} if extra scanning is needed.</value>
+  </data>
+</root>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="XArchiver.Views.SyncsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Loaded="OnLoaded"
+    Unloaded="OnUnloaded"
+    mc:Ignorable="d">
+    <ScrollViewer>
+        <Grid Padding="{StaticResource PagePadding}" RowSpacing="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Border Style="{StaticResource SecondaryContentCardBorderStyle}">
+                <StackPanel Spacing="8">
+                    <TextBlock Style="{StaticResource PageTitleTextStyle}" Text="Sync Activity" />
+                    <TextBlock
+                        Style="{StaticResource PageSubtitleTextStyle}"
+                        Text="Track queued and active API archive runs, watch progress, and restart or stop each session when needed." />
+                    <TextBlock Style="{StaticResource StatusTextBlockStyle}" Text="{Binding StatusMessage}" />
+                </StackPanel>
+            </Border>
+
+            <Grid Grid.Row="1" ColumnSpacing="16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Border Style="{StaticResource MetricCardBorderStyle}">
+                    <StackPanel Spacing="6">
+                        <TextBlock Style="{StaticResource SectionCaptionTextStyle}" Text="Running" />
+                        <TextBlock FontSize="26" FontWeight="SemiBold" Text="{Binding RunningCount}" />
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="1" Style="{StaticResource MetricCardBorderStyle}">
+                    <StackPanel Spacing="6">
+                        <TextBlock Style="{StaticResource SectionCaptionTextStyle}" Text="Queued" />
+                        <TextBlock FontSize="26" FontWeight="SemiBold" Text="{Binding QueuedCount}" />
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="2" Style="{StaticResource MetricCardBorderStyle}">
+                    <StackPanel Spacing="6">
+                        <TextBlock Style="{StaticResource SectionCaptionTextStyle}" Text="Paused" />
+                        <TextBlock FontSize="26" FontWeight="SemiBold" Text="{Binding PausedCount}" />
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="3" Style="{StaticResource MetricCardBorderStyle}">
+                    <StackPanel Spacing="6">
+                        <TextBlock Style="{StaticResource SectionCaptionTextStyle}" Text="Completed with errors" />
+                        <TextBlock FontSize="26" FontWeight="SemiBold" Text="{Binding FailedCount}" />
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="4" Style="{StaticResource MetricCardBorderStyle}">
+                    <StackPanel Spacing="6">
+                        <TextBlock Style="{StaticResource SectionCaptionTextStyle}" Text="Scheduled" />
+                        <TextBlock FontSize="26" FontWeight="SemiBold" Text="{Binding ScheduledCount}" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <Border Grid.Row="2" Style="{StaticResource ContentCardBorderStyle}">
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    Opacity="0.72"
+                    Text="No sync sessions or scheduled API runs are active yet. Queue or schedule an API profile from Archive Profiles to see it here."
+                    TextWrapping="WrapWholeWords"
+                    VerticalAlignment="Center"
+                    Visibility="{Binding EmptyStateVisibility}" />
+            </Border>
+
+            <StackPanel Grid.Row="3" Spacing="20">
+                <Border Style="{StaticResource ContentCardBorderStyle}" Visibility="{Binding ScheduledRunsVisibility}">
+                    <StackPanel Spacing="12">
+                        <TextBlock Style="{StaticResource SectionHeaderTextStyle}" Text="Scheduled API runs" />
+                        <ListView ItemsSource="{Binding ScheduledRuns}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Margin="0,0,0,12" Style="{StaticResource SecondaryContentCardBorderStyle}">
+                                        <StackPanel Spacing="8">
+                                            <Grid ColumnSpacing="12">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel Spacing="4">
+                                                    <TextBlock FontSize="18" FontWeight="SemiBold" Text="{Binding Username}" />
+                                                    <TextBlock Opacity="0.72" Text="{Binding ScheduledTimeText}" />
+                                                    <TextBlock Opacity="0.72" Text="{Binding ArchiveRangeText}" />
+                                                </StackPanel>
+                                                <Border Grid.Column="1" Style="{StaticResource SummaryBadgeBorderStyle}">
+                                                    <TextBlock Text="{Binding StateText}" />
+                                                </Border>
+                                            </Grid>
+                                            <TextBlock Style="{StaticResource StatusTextBlockStyle}" Text="{Binding StatusText}" TextWrapping="WrapWholeWords" />
+                                            <Button HorizontalAlignment="Left" Click="OnRemoveScheduledRunClick" Content="Remove" Tag="{Binding RunId}" />
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackPanel>
+                </Border>
+
+                <ListView
+                    ItemsSource="{Binding Sessions}"
+                    Visibility="{Binding ListVisibility}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border
+                                Margin="0,0,0,12"
+                                Style="{StaticResource ContentCardBorderStyle}">
+                                <StackPanel Spacing="12">
+                                    <Grid ColumnSpacing="12">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Spacing="4">
+                                            <TextBlock FontSize="18" FontWeight="SemiBold" Text="{Binding Username, Mode=OneTime}" />
+                                            <TextBlock Opacity="0.72" Text="{Binding ArchiveRootPath, Mode=OneTime}" TextWrapping="WrapWholeWords" />
+                                        </StackPanel>
+                                        <Border Grid.Column="1" Style="{StaticResource SummaryBadgeBorderStyle}">
+                                            <TextBlock Text="{Binding StateText, Mode=OneTime}" />
+                                        </Border>
+                                    </Grid>
+
+                                    <ProgressBar Height="8" Maximum="100" Value="{Binding ProgressValue, Mode=OneTime}" />
+                                    <TextBlock FontWeight="SemiBold" Text="{Binding LatestStatusText, Mode=OneTime}" TextWrapping="WrapWholeWords" />
+                                    <TextBlock Opacity="0.72" Text="{Binding ProgressSummary, Mode=OneTime}" TextWrapping="WrapWholeWords" />
+                                    <TextBlock Opacity="0.72" Text="{Binding PageScanSummary, Mode=OneTime}" TextWrapping="WrapWholeWords" />
+                                    <TextBlock Opacity="0.72" Text="{Binding MediaSummary, Mode=OneTime}" TextWrapping="WrapWholeWords" />
+                                    <TextBlock Opacity="0.72" Text="{Binding LastUpdatedText, Mode=OneTime}" TextWrapping="WrapWholeWords" />
+
+                                    <StackPanel Orientation="Horizontal" Spacing="12">
+                                        <Button Click="OnStartSessionClick" Content="{Binding StartButtonText, Mode=OneTime}" IsEnabled="{Binding CanStart, Mode=OneTime}" Tag="{Binding SessionId, Mode=OneTime}" />
+                                        <Button Click="OnPauseSessionClick" Content="Pause" IsEnabled="{Binding CanPause, Mode=OneTime}" Tag="{Binding SessionId, Mode=OneTime}" />
+                                        <Button Click="OnStopSessionClick" Content="Stop" IsEnabled="{Binding CanStop, Mode=OneTime}" Tag="{Binding SessionId, Mode=OneTime}" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Page>

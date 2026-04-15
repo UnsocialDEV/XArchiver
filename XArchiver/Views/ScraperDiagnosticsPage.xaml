@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="XArchiver.Views.ScraperDiagnosticsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="RootPage"
+    KeyDown="OnPageKeyDown"
+    Loaded="OnLoaded"
+    SizeChanged="OnPageSizeChanged"
+    Unloaded="OnUnloaded"
+    mc:Ignorable="d">
+    <Grid>
+        <ScrollViewer>
+            <Grid Padding="{StaticResource PagePadding}" RowSpacing="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Border Style="{StaticResource SecondaryContentCardBorderStyle}">
+                    <Grid ColumnSpacing="24">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="360" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Spacing="8">
+                            <TextBlock Style="{StaticResource PageTitleTextStyle}" Text="Web Capture" />
+                            <TextBlock
+                                Style="{StaticResource PageSubtitleTextStyle}"
+                                Text="Run a saved profile through the browser-based fallback flow when you need a lower-cost archive path than the X API." />
+                            <TextBlock
+                                Foreground="IndianRed"
+                                Text="{Binding StatusMessage}"
+                                TextWrapping="WrapWholeWords"
+                                Visibility="{Binding ErrorStatusVisibility}" />
+                            <TextBlock
+                                Style="{StaticResource StatusTextBlockStyle}"
+                                Text="{Binding StatusMessage}"
+                                Visibility="{Binding InfoStatusVisibility}" />
+                        </StackPanel>
+
+                        <Border Grid.Column="1" Style="{StaticResource ContentCardBorderStyle}">
+                            <StackPanel Spacing="10">
+                                <TextBlock Style="{StaticResource SectionHeaderTextStyle}" Text="Selected profile" />
+                                <TextBlock Style="{StaticResource StatusTextBlockStyle}" Text="{Binding ProfileContextText}" />
+                                <Border Style="{StaticResource SummaryBadgeBorderStyle}">
+                                    <TextBlock Text="{Binding SelectedProfileSourceText}" />
+                                </Border>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </Border>
+
+                <Grid Grid.Row="1" ColumnSpacing="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="420" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Border Style="{StaticResource ContentCardBorderStyle}">
+                        <StackPanel Spacing="16">
+                            <TextBlock Style="{StaticResource SectionHeaderTextStyle}" Text="Profile selection" />
+                            <ComboBox
+                                DisplayMemberPath="Username"
+                                ItemsSource="{Binding Profiles}"
+                                SelectedItem="{Binding SelectedProfile, Mode=TwoWay}" />
+
+                            <StackPanel Spacing="8">
+                                <TextBlock FontWeight="SemiBold" Text="Profile URL" />
+                                <TextBlock Style="{StaticResource StatusTextBlockStyle}" Text="{Binding ProfileUrl}" />
+                            </StackPanel>
+
+                            <StackPanel Spacing="8">
+                                <TextBlock FontWeight="SemiBold" Text="Archive folder" />
+                                <TextBlock Style="{StaticResource StatusTextBlockStyle}" Text="{Binding ArchiveRootPath}" />
+                            </StackPanel>
+
+                            <StackPanel Spacing="8">
+                                <TextBlock FontWeight="SemiBold" Text="Capture target" />
+                                <TextBlock Style="{StaticResource StatusTextBlockStyle}" Text="{Binding TargetPostsText}" />
+                            </StackPanel>
+
+                            <StackPanel Spacing="8">
+                                <TextBlock FontWeight="SemiBold" Text="Capture mode" />
+                                <ComboBox SelectedIndex="{Binding SelectedExecutionModeIndex, Mode=TwoWay}">
+                                    <ComboBoxItem Content="Normal" />
+                                    <ComboBoxItem Content="Conservative" />
+                                </ComboBox>
+                                <TextBlock Style="{StaticResource SectionCaptionTextStyle}" Text="{Binding ExecutionModeDescription}" />
+                            </StackPanel>
+
+                            <StackPanel Spacing="10">
+                                <CheckBox Content="Scheduled Start Time" IsChecked="{Binding Timing.UseScheduledStart, Mode=TwoWay}" />
+                                <Grid ColumnSpacing="12">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <DatePicker Date="{Binding Timing.ScheduledStartDate, Mode=TwoWay}" IsEnabled="{Binding Timing.UseScheduledStart}" />
+                                    <TimePicker Grid.Column="1" Time="{Binding Timing.ScheduledStartTime, Mode=TwoWay}" IsEnabled="{Binding Timing.UseScheduledStart}" />
+                                </Grid>
+                            </StackPanel>
+
+                            <StackPanel Spacing="10">
+                                <CheckBox Content="Archive Time Range" IsChecked="{Binding Timing.UseArchiveRange, Mode=TwoWay}" />
+                                <Grid ColumnSpacing="12" RowSpacing="8">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock VerticalAlignment="Center" Text="Start" />
+                                    <DatePicker Grid.Column="1" Date="{Binding Timing.ArchiveStartDate, Mode=TwoWay}" IsEnabled="{Binding Timing.UseArchiveRange}" />
+                                    <TimePicker Grid.Column="2" Time="{Binding Timing.ArchiveStartTime, Mode=TwoWay}" IsEnabled="{Binding Timing.UseArchiveRange}" />
+                                    <TextBlock Grid.Row="1" VerticalAlignment="Center" Text="Stop" />
+                                    <DatePicker Grid.Row="1" Grid.Column="1" Date="{Binding Timing.ArchiveEndDate, Mode=TwoWay}" IsEnabled="{Binding Timing.UseArchiveRange}" />
+                                    <TimePicker Grid.Row="1" Grid.Column="2" Time="{Binding Timing.ArchiveEndTime, Mode=TwoWay}" IsEnabled="{Binding Timing.UseArchiveRange}" />
+                                </Grid>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Column="1" Style="{StaticResource ContentCardBorderStyle}">
+                        <StackPanel Spacing="16">
+                            <TextBlock Style="{StaticResource SectionHeaderTextStyle}" Text="Browser session and controls" />
+                            <TextBlock Style="{StaticResource StatusTextBlockStyle}" Text="{Binding SessionStatusText}" />
+                            <StackPanel Orientation="Horizontal" Spacing="12">
+                                <Button
+                                    Content="Open X login browser"
+                                    Click="OnOpenLoginBrowserClick"
+                                    Visibility="{Binding SessionLoginActionsVisibility}" />
+                                <Button
+                                    Content="I finished logging in"
+                                    Click="OnValidateSessionClick"
+                                    Visibility="{Binding SessionLoginActionsVisibility}" />
+                                <Button Content="Reset session" Click="OnResetSessionClick" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Spacing="12">
+                                <Button Content="Start web capture" Click="OnStartScrapeClick" IsEnabled="{Binding CanStartScrape}" />
+                                <Button Content="Schedule web capture" Click="OnScheduleScrapeClick" />
+                                <Button Content="Pause" Click="OnPauseScrapeClick" IsEnabled="{Binding CanPause}" />
+                                <Button Content="Resume" Click="OnResumeScrapeClick" IsEnabled="{Binding CanResume}" />
+                                <Button Content="Stop and save" Click="OnStopScrapeAndSaveClick" IsEnabled="{Binding CanStopAndSave}" />
+                                <Button Content="Stop" Click="OnStopScrapeClick" IsEnabled="{Binding CanStop}" />
+                                <Button Content="Force kill" Click="OnForceKillScrapeClick" IsEnabled="{Binding CanForceKill}" />
+                                <Button Content="Open live browser" Click="OnOpenLiveBrowserClick" IsEnabled="{Binding CanOpenLiveBrowser}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <Border Grid.Row="2" Style="{StaticResource ContentCardBorderStyle}">
+                    <StackPanel Spacing="12">
+                        <TextBlock Style="{StaticResource SectionHeaderTextStyle}" Text="Scheduled web capture runs" />
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            Opacity="0.72"
+                            Text="No web capture runs are scheduled yet."
+                            Visibility="{Binding ScheduledRunsEmptyVisibility}" />
+                        <ListView ItemsSource="{Binding ScheduledRuns}" Visibility="{Binding ScheduledRunsListVisibility}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Margin="0,0,0,12" Style="{StaticResource SecondaryContentCardBorderStyle}">
+                                        <StackPanel Spacing="8">
+                                            <Grid ColumnSpacing="12">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel Spacing="4">
+                                                    <TextBlock FontWeight="SemiBold" Text="{Binding Username}" />
+                                                    <TextBlock Opacity="0.72" Text="{Binding ScheduledTimeText}" />
+                                                    <TextBlock Opacity="0.72" Text="{Binding ArchiveRangeText}" />
+                                                </StackPanel>
+                                                <Border Grid.Column="1" Style="{StaticResource SummaryBadgeBorderStyle}">
+                                                    <TextBlock Text="{Binding StateText}" />
+                                                </Border>
+                                            </Grid>
+                                            <TextBlock Style="{StaticResource StatusTextBlockStyle}" Text="{Binding StatusText}" TextWrapping="WrapWholeWords" />
+                                            <Button HorizontalAlignment="Left" Click="OnRemoveScheduledRunClick" Content="Remove" Tag="{Binding RunId}" />
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackPanel>
+                </Border>
+
+                <Grid Grid.Row="3" ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Border Style="{StaticResource MetricCardBorderStyle}">
+                        <StackPanel Spacing="6">
+                            <TextBlock Style="{StaticResource SectionCaptionTextStyle}" Text="Run state" />
+                            <TextBlock FontSize="24" FontWeight="SemiBold" Text="{Binding StateText}" />
+                            <TextBlock Style="{StaticResource SectionCaptionTextStyle}" Text="{Binding StageText}" />
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Column="1" Style="{StaticResource MetricCardBorderStyle}">
+                        <StackPanel Spacing="6">
+                            <TextBlock Style="{StaticResource SectionCaptionTextStyle}" Text="Progress" />
+                            <TextBlock FontSize="24" FontWeight="SemiBold" Text="{Binding ProgressPercentText}" />
+                            <ProgressBar Height="8" Maximum="100" Value="{Binding ProgressValue}" />
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Column="2" Style="{StaticResource MetricCardBorderStyle}">
+                        <StackPanel Spacing="6">
+                            <TextBlock Style="{StaticResource SectionCaptionTextStyle}" Text="Capture summary" />
+                            <TextBlock FontSize="24" FontWeight="SemiBold" Text="{Binding CollectedPostsText}" />
+                            <TextBlock Style="{StaticResource SectionCaptionTextStyle}" Text="{Binding ProgressSummaryText}" />
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Column="3" Style="{StaticResource MetricCardBorderStyle}">
+                        <StackPanel Spacing="6">
+                            <TextBlock Style="{StaticResource SectionCaptionTextStyle}" Text="Current page" />
+                            <TextBlock FontSize="18" FontWeight="SemiBold" Text="{Binding CurrentPageTitle}" TextWrapping="WrapWholeWords" />
+                            <TextBlock Style="{StaticResource SectionCaptionTextStyle}" Text="{Binding CurrentUrl}" />
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <Grid Grid.Row="4" ColumnSpacing="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Spacing="20">
+                        <Border Style="{StaticResource ContentCardBorderStyle}">
+                            <StackPanel Spacing="12">
+                                <TextBlock Style="{StaticResource SectionHeaderTextStyle}" Text="Live snapshot" />
+                                <ToggleSwitch Header="Show live screenshots" IsOn="{Binding ShowLiveScreenshots, Mode=TwoWay}" />
+                                <Button
+                                    Click="OnOpenScreenshotClick"
+                                    HorizontalContentAlignment="Stretch"
+                                    IsEnabled="{Binding HasSnapshot}"
+                                    Padding="0"
+                                    Visibility="{Binding LiveScreenshotSectionVisibility}">
+                                    <Border Style="{StaticResource SecondaryContentCardBorderStyle}">
+                                        <Grid MinHeight="280">
+                                            <Image
+                                                MaxHeight="{Binding ScreenshotOverlay.PreviewMaxHeight}"
+                                                Source="{Binding LatestScreenshotPath, Converter={StaticResource FilePathToImageSourceConverter}}"
+                                                Stretch="Uniform"
+                                                VerticalAlignment="Center"
+                                                Visibility="{Binding LiveScreenshotVisibility}" />
+                                            <TextBlock
+                                                HorizontalAlignment="Center"
+                                                Opacity="0.72"
+                                                Text="No live screenshot captured yet."
+                                                VerticalAlignment="Center"
+                                                Visibility="{Binding LiveScreenshotEmptyVisibility}" />
+                                        </Grid>
+                                    </Border>
+                                </Button>
+                                <Border
+                                    Style="{StaticResource SecondaryContentCardBorderStyle}"
+                                    Visibility="{Binding InterventionVisibility}">
+                                    <StackPanel Spacing="6">
+                                        <TextBlock FontWeight="SemiBold" Text="Manual intervention needed" />
+                                        <TextBlock Style="{StaticResource StatusTextBlockStyle}" Text="{Binding BlockingReason}" />
+                                    </StackPanel>
+                                </Border>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource ContentCardBorderStyle}">
+                            <StackPanel Spacing="12">
+                                <TextBlock Style="{StaticResource SectionHeaderTextStyle}" Text="Latest extracted posts" />
+                                <ListView Height="{Binding PreviewPostsPanelHeight}" ItemsSource="{Binding PreviewPosts}">
+                                    <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                            <StackPanel Padding="0,8" Spacing="4">
+                                                <Grid ColumnSpacing="8">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Text="{Binding CreatedAtText, Mode=OneTime}" />
+                                                    <TextBlock Grid.Column="1" Opacity="0.72" Text="{Binding MediaSummaryText, Mode=OneTime}" />
+                                                </Grid>
+                                                <TextBlock FontWeight="SemiBold" Text="{Binding Username, Mode=OneTime}" />
+                                                <TextBlock MaxLines="3" Text="{Binding PreviewText, Mode=OneTime}" TextTrimming="CharacterEllipsis" TextWrapping="WrapWholeWords" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+
+                    <Border Grid.Column="1" Style="{StaticResource ContentCardBorderStyle}">
+                        <StackPanel Spacing="12">
+                            <TextBlock Style="{StaticResource SectionHeaderTextStyle}" Text="Troubleshooting console" />
+                            <ListView Height="{Binding DiagnosticsPanelHeight}" ItemsSource="{Binding DiagnosticsEvents}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Padding="0,8" Spacing="4">
+                                            <Grid ColumnSpacing="8">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Text="{Binding TimestampText, Mode=OneTime}" />
+                                                <TextBlock Grid.Column="1" FontWeight="SemiBold" Text="{Binding SeverityText, Mode=OneTime}" />
+                                                <TextBlock Grid.Column="2" Opacity="0.72" Text="{Binding CategoryText, Mode=OneTime}" />
+                                            </Grid>
+                                            <TextBlock Text="{Binding MessageText, Mode=OneTime}" TextWrapping="WrapWholeWords" />
+                                            <TextBlock Opacity="0.72" Text="{Binding DetailsText, Mode=OneTime}" TextWrapping="WrapWholeWords" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
+
+        <Grid
+            Background="#CC111111"
+            Visibility="{Binding ScreenshotOverlay.OverlayVisibility, FallbackValue=Collapsed}">
+            <Grid Padding="24" RowSpacing="16">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid ColumnSpacing="12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        FontSize="20"
+                        FontWeight="SemiBold"
+                        Foreground="White"
+                        Text="Live web capture screenshot"
+                        TextWrapping="WrapWholeWords" />
+                    <Button Grid.Column="1" Content="Close" Click="OnCloseScreenshotClick" />
+                </Grid>
+
+                <ScrollViewer
+                    x:Name="OverlayScreenshotScrollViewer"
+                    Grid.Row="1"
+                    MaxZoomFactor="6"
+                    MinZoomFactor="1"
+                    ZoomMode="Enabled">
+                    <Image
+                        HorizontalAlignment="Center"
+                        MaxHeight="{Binding ScreenshotOverlay.ViewportHeight}"
+                        MaxWidth="{Binding ScreenshotOverlay.ViewportWidth}"
+                        Source="{Binding ScreenshotOverlay.CurrentScreenshotPath, Converter={StaticResource FilePathToImageSourceConverter}}"
+                        Stretch="Uniform"
+                        VerticalAlignment="Center" />
+                </ScrollViewer>
+
+                <TextBlock
+                    Grid.Row="2"
+                    Foreground="White"
+                    Text="{Binding ScreenshotOverlay.OverlayStatusText}"
+                    TextWrapping="WrapWholeWords" />
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

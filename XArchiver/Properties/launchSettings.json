@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "XArchiver (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "XArchiver (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

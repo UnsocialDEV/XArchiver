@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="XArchiver.Views.ViewerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:controls="using:XArchiver.Controls"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="RootPage"
+    mc:Ignorable="d"
+    KeyDown="OnPageKeyDown"
+    SizeChanged="OnPageSizeChanged">
+    <Grid Padding="24" RowSpacing="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Spacing="4">
+            <TextBlock
+                x:Uid="ViewerPageTitle"
+                FontSize="30"
+                FontWeight="SemiBold" />
+            <TextBlock
+                x:Uid="ViewerPageSubtitle"
+                Opacity="0.72"
+                TextWrapping="WrapWholeWords" />
+        </StackPanel>
+
+        <Grid
+            Grid.Row="1"
+            ColumnSpacing="24">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="420" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Border
+                x:Name="ViewerSelectionPane"
+                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                CornerRadius="20"
+                Padding="16">
+                <Grid RowSpacing="12">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Spacing="8">
+                        <TextBlock x:Uid="ViewerPageProfileLabel" />
+                        <ComboBox
+                            AutomationProperties.AutomationId="ViewerProfileComboBox"
+                            AutomationProperties.Name="Archive profile selector"
+                            DisplayMemberPath="Username"
+                            ItemsSource="{x:Bind ViewModel.Profiles, Mode=OneWay}"
+                            SelectedItem="{x:Bind ViewModel.SelectedProfile, Mode=TwoWay}"
+                            SelectionChanged="OnProfileSelectionChanged" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Spacing="8">
+                        <TextBlock x:Uid="ViewerPageSearchLabel" />
+                        <TextBox
+                            x:Uid="ViewerPageSearchBox"
+                            AutomationProperties.AutomationId="ViewerSearchTextBox"
+                            AutomationProperties.Name="Archive search"
+                            Text="{x:Bind ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+
+                    <Grid Grid.Row="2" ColumnSpacing="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <CheckBox
+                            x:Uid="ViewerPageOriginalFilter"
+                            AutomationProperties.AutomationId="ViewerOriginalFilter"
+                            IsChecked="{x:Bind ViewModel.IncludeOriginalPosts, Mode=TwoWay}" />
+                        <CheckBox
+                            x:Uid="ViewerPageRepliesFilter"
+                            Grid.Column="1"
+                            AutomationProperties.AutomationId="ViewerRepliesFilter"
+                            IsChecked="{x:Bind ViewModel.IncludeReplies, Mode=TwoWay}" />
+                    </Grid>
+
+                    <Grid Grid.Row="3" ColumnSpacing="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <CheckBox
+                            x:Uid="ViewerPageQuotesFilter"
+                            AutomationProperties.AutomationId="ViewerQuotesFilter"
+                            IsChecked="{x:Bind ViewModel.IncludeQuotes, Mode=TwoWay}" />
+                        <CheckBox
+                            x:Uid="ViewerPageRepostsFilter"
+                            Grid.Column="1"
+                            AutomationProperties.AutomationId="ViewerRepostsFilter"
+                            IsChecked="{x:Bind ViewModel.IncludeReposts, Mode=TwoWay}" />
+                    </Grid>
+
+                    <Grid Grid.Row="4" ColumnSpacing="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <CheckBox
+                            x:Uid="ViewerPageTextFilter"
+                            AutomationProperties.AutomationId="ViewerTextFilter"
+                            IsChecked="{x:Bind ViewModel.IncludeTextPosts, Mode=TwoWay}" />
+                        <CheckBox
+                            x:Uid="ViewerPageImagesFilter"
+                            Grid.Column="1"
+                            AutomationProperties.AutomationId="ViewerImagesFilter"
+                            IsChecked="{x:Bind ViewModel.IncludeImagePosts, Mode=TwoWay}" />
+                        <CheckBox
+                            x:Uid="ViewerPageVideosFilter"
+                            Grid.Column="2"
+                            AutomationProperties.AutomationId="ViewerVideosFilter"
+                            IsChecked="{x:Bind ViewModel.IncludeVideoPosts, Mode=TwoWay}" />
+                    </Grid>
+
+                    <CommandBar Grid.Row="5" DefaultLabelPosition="Right">
+                        <AppBarButton
+                            x:Uid="ViewerPageRefreshButton"
+                            AutomationProperties.AutomationId="ViewerRefreshButton"
+                            Click="OnRefreshClick"
+                            Icon="Refresh" />
+                    </CommandBar>
+
+                    <Grid Grid.Row="7" RowSpacing="12">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock
+                            AutomationProperties.AutomationId="ViewerResultsSummaryTextBlock"
+                            FontWeight="SemiBold"
+                            Text="{x:Bind ViewModel.ResultsSummaryText, Mode=OneWay}" />
+                        <TextBlock
+                            Grid.Row="1"
+                            AutomationProperties.AutomationId="ViewerStatusTextBlock"
+                            Text="{x:Bind ViewModel.StatusMessage, Mode=OneWay}"
+                            TextWrapping="WrapWholeWords" />
+                        <ListView
+                            x:Name="PostsListView"
+                            Grid.Row="2"
+                            AutomationProperties.AutomationId="PostsListView"
+                            AutomationProperties.Name="Archived posts"
+                            ItemsSource="{x:Bind ViewModel.Posts, Mode=OneWay}"
+                            SelectedItem="{x:Bind ViewModel.SelectedPost, Mode=TwoWay}"
+                            SelectionChanged="OnPostSelectionChanged">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Padding="0,8,0,8" Spacing="6">
+                                        <Grid ColumnSpacing="8">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock
+                                                FontWeight="SemiBold"
+                                                Text="{Binding CreatedAtText}" />
+                                            <TextBlock
+                                                Grid.Column="1"
+                                                Opacity="0.72"
+                                                Text="{Binding PostTypeText}" />
+                                            <TextBlock
+                                                Grid.Column="2"
+                                                Opacity="0.72"
+                                                Text="{Binding MediaBadgeText}" />
+                                        </Grid>
+                                        <TextBlock
+                                            MaxLines="4"
+                                            Text="{Binding PreviewText}"
+                                            TextTrimming="CharacterEllipsis"
+                                            TextWrapping="WrapWholeWords" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <Border
+                x:Name="ViewerDetailsPane"
+                Grid.Column="1"
+                Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                CornerRadius="20"
+                Padding="16">
+                <TabView>
+                    <TabView.TabItems>
+                        <TabViewItem x:Uid="ViewerTabOverview">
+                            <ScrollViewer>
+                                <StackPanel Spacing="16">
+                                    <TextBlock
+                                        x:Uid="ViewerOverviewHeader"
+                                        FontSize="20"
+                                        FontWeight="SemiBold" />
+                                    <ItemsControl ItemsSource="{x:Bind ViewModel.Details.OverviewFields, Mode=OneWay}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Margin="0,0,0,12" Spacing="4">
+                                                    <TextBlock
+                                                        FontWeight="SemiBold"
+                                                        Text="{Binding Label, Mode=OneTime}" />
+                                                    <TextBlock
+                                                        Text="{Binding Value, Mode=OneTime}"
+                                                        TextWrapping="WrapWholeWords" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                            </ScrollViewer>
+                        </TabViewItem>
+
+                        <TabViewItem x:Uid="ViewerTabMedia">
+                            <ScrollViewer>
+                                <StackPanel Spacing="16">
+                                    <TextBlock
+                                        x:Uid="ViewerMediaHeader"
+                                        FontSize="20"
+                                        FontWeight="SemiBold" />
+                                    <ItemsControl ItemsSource="{x:Bind ViewModel.Details.MediaItems, Mode=OneWay}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border
+                                                    Margin="0,0,0,16"
+                                                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                                                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                                    BorderThickness="1"
+                                                    CornerRadius="16"
+                                                    Padding="12">
+                                                    <StackPanel Spacing="12">
+                                                        <Button
+                                                            AutomationProperties.Name="Open archived media fullscreen"
+                                                            Click="OnOpenMediaClick"
+                                                            HorizontalContentAlignment="Stretch"
+                                                            Padding="0"
+                                                            Tag="{Binding Mode=OneTime}">
+                                                            <Grid>
+                                                                <Border
+                                                                    Background="{ThemeResource AccentFillColorSecondaryBrush}"
+                                                                    CornerRadius="12"
+                                                                    Padding="12">
+                                                                    <Grid>
+                                                                        <controls:ArchivedVideoPreviewControl
+                                                                            MediaPath="{Binding MediaPath, Mode=OneTime}"
+                                                                            Visibility="{Binding LiveVideoPreviewVisibility, Mode=OneTime}" />
+                                                                        <Image
+                                                                            HorizontalAlignment="Stretch"
+                                                                            MaxHeight="{Binding ElementName=RootPage, Path=ViewModel.Details.MediaPreviewMaxHeight}"
+                                                                            Source="{Binding Media.RelativePath, Mode=OneTime, Converter={StaticResource FilePathToImageSourceConverter}}"
+                                                                            Stretch="Uniform"
+                                                                            VerticalAlignment="Center"
+                                                                            Visibility="{Binding ThumbnailVisibility, Mode=OneTime}" />
+                                                                        <StackPanel
+                                                                            HorizontalAlignment="Center"
+                                                                            Spacing="8"
+                                                                            VerticalAlignment="Center"
+                                                                            Visibility="{Binding VideoTileVisibility, Mode=OneTime}">
+                                                                            <SymbolIcon Symbol="Play" />
+                                                                            <TextBlock
+                                                                                HorizontalAlignment="Center"
+                                                                                Text="{Binding KindText, Mode=OneTime}" />
+                                                                        </StackPanel>
+                                                                    </Grid>
+                                                                </Border>
+                                                            </Grid>
+                                                        </Button>
+                                                        <TextBlock Text="{Binding KindText, Mode=OneTime}" />
+                                                        <TextBlock Text="{Binding MediaKeyText, Mode=OneTime}" />
+                                                        <TextBlock Text="{Binding PartialStatusText, Mode=OneTime}" />
+                                                        <TextBlock Text="{Binding DimensionsText, Mode=OneTime}" />
+                                                        <TextBlock Text="{Binding DurationText, Mode=OneTime}" />
+                                                        <TextBlock
+                                                            Text="{Binding SourceUrlText, Mode=OneTime}"
+                                                            TextWrapping="WrapWholeWords" />
+                                                        <TextBlock
+                                                            Text="{Binding Media.RelativePath, Mode=OneTime}"
+                                                            TextWrapping="WrapWholeWords" />
+                                                    </StackPanel>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                            </ScrollViewer>
+                        </TabViewItem>
+
+                        <TabViewItem x:Uid="ViewerTabGallery">
+                            <Grid RowSpacing="16">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <TextBlock
+                                    x:Uid="ViewerGalleryHeader"
+                                    FontSize="20"
+                                    FontWeight="SemiBold" />
+                                <TextBlock
+                                    Grid.Row="1"
+                                    Text="{x:Bind ViewModel.GallerySummaryText, Mode=OneWay}"
+                                    TextWrapping="WrapWholeWords" />
+                                <GridView
+                                    x:Name="GalleryGridView"
+                                    Grid.Row="2"
+                                    AutomationProperties.AutomationId="GalleryGridView"
+                                    AutomationProperties.Name="Archived media gallery"
+                                    IsItemClickEnabled="True"
+                                    ItemClick="OnGalleryItemClick"
+                                    ItemsSource="{x:Bind ViewModel.Gallery.Items, Mode=OneWay}"
+                                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                    ScrollViewer.HorizontalScrollMode="Disabled"
+                                    ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                    ScrollViewer.VerticalScrollMode="Enabled"
+                                    SelectionMode="None">
+                                    <GridView.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <ItemsWrapGrid Orientation="Horizontal" />
+                                        </ItemsPanelTemplate>
+                                    </GridView.ItemsPanel>
+                                    <GridView.ItemContainerStyle>
+                                        <Style TargetType="GridViewItem">
+                                            <Setter Property="Padding" Value="0" />
+                                            <Setter Property="Margin" Value="0,0,12,12" />
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                                        </Style>
+                                    </GridView.ItemContainerStyle>
+                                    <GridView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border
+                                                Width="{Binding ElementName=RootPage, Path=ViewModel.Gallery.TileWidth}"
+                                                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                                BorderThickness="1"
+                                                CornerRadius="16"
+                                                Padding="10">
+                                                <StackPanel Spacing="10">
+                                                    <Border
+                                                        Background="{ThemeResource AccentFillColorSecondaryBrush}"
+                                                        CornerRadius="12"
+                                                        Height="{Binding ElementName=RootPage, Path=ViewModel.Gallery.PreviewHeight}"
+                                                        Padding="8">
+                                                        <Grid>
+                                                            <Image
+                                                                HorizontalAlignment="Stretch"
+                                                                Source="{Binding ThumbnailPath, Mode=OneTime, Converter={StaticResource FilePathToImageSourceConverter}}"
+                                                                Stretch="Uniform"
+                                                                VerticalAlignment="Center"
+                                                                Visibility="{Binding ThumbnailVisibility, Mode=OneTime}" />
+                                                            <StackPanel
+                                                                HorizontalAlignment="Center"
+                                                                Spacing="8"
+                                                                VerticalAlignment="Center"
+                                                                Visibility="{Binding VideoTileVisibility, Mode=OneTime}">
+                                                                <SymbolIcon Symbol="Play" />
+                                                                <TextBlock
+                                                                    HorizontalAlignment="Center"
+                                                                    Text="{Binding KindText, Mode=OneTime}" />
+                                                            </StackPanel>
+                                                        </Grid>
+                                                    </Border>
+                                                    <Grid ColumnSpacing="8">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="Auto" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock
+                                                            FontWeight="SemiBold"
+                                                            Text="{Binding CreatedAtText, Mode=OneTime}" />
+                                                        <TextBlock
+                                                            Grid.Column="1"
+                                                            Opacity="0.72"
+                                                            Text="{Binding KindText, Mode=OneTime}" />
+                                                    </Grid>
+                                                    <TextBlock
+                                                        Opacity="0.72"
+                                                        Text="{Binding UsernameText, Mode=OneTime}" />
+                                                    <TextBlock
+                                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                                        Text="{Binding PartialStatusText, Mode=OneTime}"
+                                                        Visibility="{Binding PartialBadgeVisibility, Mode=OneTime}" />
+                                                </StackPanel>
+                                            </Border>
+                                        </DataTemplate>
+                                    </GridView.ItemTemplate>
+                                </GridView>
+                            </Grid>
+                        </TabViewItem>
+
+                        <TabViewItem x:Uid="ViewerTabMetadata">
+                            <Grid RowSpacing="12">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <TextBlock
+                                    AutomationProperties.AutomationId="ViewerMetadataStatusTextBlock"
+                                    Text="{x:Bind ViewModel.Details.MetadataStatusText, Mode=OneWay}"
+                                    TextWrapping="WrapWholeWords" />
+                                <Button
+                                    x:Uid="ViewerMetadataOpenButton"
+                                    Grid.Row="1"
+                                    AutomationProperties.AutomationId="ViewerMetadataOpenButton"
+                                    Click="OnOpenMetadataFileClick"
+                                    IsEnabled="{x:Bind ViewModel.Details.CanOpenMetadataFile, Mode=OneWay}" />
+                                <TextBox
+                                    Grid.Row="2"
+                                    AcceptsReturn="True"
+                                    IsReadOnly="True"
+                                    Text="{x:Bind ViewModel.Details.MetadataJsonText, Mode=OneWay}"
+                                    TextWrapping="Wrap" />
+                            </Grid>
+                        </TabViewItem>
+                    </TabView.TabItems>
+                </TabView>
+            </Border>
+        </Grid>
+
+        <Grid
+            x:Name="MediaOverlayRoot"
+            Grid.RowSpan="2"
+            Background="#CC111111"
+            Visibility="{x:Bind ViewModel.MediaOverlay.OverlayVisibility, Mode=OneWay}">
+            <Grid Padding="24" RowSpacing="16">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid ColumnSpacing="12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Button
+                        x:Uid="ViewerOverlayPreviousButton"
+                        AutomationProperties.AutomationId="ViewerOverlayPreviousButton"
+                        Click="OnOverlayPreviousClick"
+                        IsEnabled="{x:Bind ViewModel.MediaOverlay.CanMovePrevious, Mode=OneWay}" />
+                    <TextBlock
+                        Grid.Column="1"
+                        FontSize="20"
+                        FontWeight="SemiBold"
+                        Foreground="White"
+                        HorizontalAlignment="Center"
+                        Text="{x:Bind ViewModel.MediaOverlay.CurrentTitle, Mode=OneWay}"
+                        TextWrapping="WrapWholeWords" />
+                    <Button
+                        x:Uid="ViewerOverlayCloseButton"
+                        Grid.Column="2"
+                        AutomationProperties.AutomationId="ViewerOverlayCloseButton"
+                        Click="OnOverlayCloseClick" />
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <ScrollViewer
+                        x:Name="OverlayImageScrollViewer"
+                        MaxZoomFactor="6"
+                        MinZoomFactor="1"
+                        ZoomMode="Enabled">
+                        <Image
+                            AutomationProperties.Name="Fullscreen archived image"
+                            HorizontalAlignment="Center"
+                            MaxHeight="{x:Bind ViewModel.MediaOverlay.ViewportHeight, Mode=OneWay}"
+                            MaxWidth="{x:Bind ViewModel.MediaOverlay.ViewportWidth, Mode=OneWay}"
+                            Source="{x:Bind ViewModel.MediaOverlay.CurrentMediaPath, Mode=OneWay, Converter={StaticResource FilePathToImageSourceConverter}}"
+                            Stretch="Uniform"
+                            VerticalAlignment="Center"
+                            Visibility="{x:Bind ViewModel.MediaOverlay.ImageVisibility, Mode=OneWay}" />
+                    </ScrollViewer>
+                    <MediaPlayerElement
+                        AreTransportControlsEnabled="True"
+                        AutoPlay="False"
+                        HorizontalAlignment="Stretch"
+                        Source="{x:Bind ViewModel.MediaOverlay.CurrentMediaPath, Mode=OneWay, Converter={StaticResource FilePathToMediaSourceConverter}}"
+                        VerticalAlignment="Stretch"
+                        Visibility="{x:Bind ViewModel.MediaOverlay.VideoVisibility, Mode=OneWay}" />
+                </Grid>
+
+                <Grid
+                    Grid.Row="2"
+                    ColumnSpacing="12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Foreground="White"
+                        Text="{x:Bind ViewModel.MediaOverlay.OverlayStatusText, Mode=OneWay}"
+                        TextWrapping="WrapWholeWords" />
+                    <Button
+                        x:Uid="ViewerOverlayNextButton"
+                        Grid.Column="1"
+                        AutomationProperties.AutomationId="ViewerOverlayNextButton"
+                        Click="OnOverlayNextClick"
+                        IsEnabled="{x:Bind ViewModel.MediaOverlay.CanMoveNext, Mode=OneWay}" />
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

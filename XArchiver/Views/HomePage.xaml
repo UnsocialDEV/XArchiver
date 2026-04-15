@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="XArchiver.Views.HomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Loaded="OnLoaded"
+    Unloaded="OnUnloaded"
+    mc:Ignorable="d">
+    <ScrollViewer>
+        <Grid Padding="{StaticResource PagePadding}" RowSpacing="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Border Style="{StaticResource SecondaryContentCardBorderStyle}">
+                <Grid ColumnSpacing="24">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="340" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Spacing="8">
+                        <TextBlock Style="{StaticResource PageTitleTextStyle}" Text="Archive Overview" />
+                        <TextBlock
+                            Style="{StaticResource PageSubtitleTextStyle}"
+                            Text="XArchiver is a local-first archive workspace for public X profiles. Use API sync when you want structured archive runs, and use web capture when you need the lower-cost fallback path." />
+                        <TextBlock Style="{StaticResource StatusTextBlockStyle}" Text="{x:Bind ViewModel.RecentActivityText, Mode=OneWay}" />
+                    </StackPanel>
+
+                    <Border Grid.Column="1" Style="{StaticResource ContentCardBorderStyle}">
+                        <StackPanel Spacing="12">
+                            <TextBlock Style="{StaticResource SectionHeaderTextStyle}" Text="Quick actions" />
+                            <Button Content="Open archive profiles" Click="OnOpenProfilesClick" />
+                            <Button Content="Open web capture" Click="OnOpenScraperClick" />
+                            <Button Content="Open archive viewer" Click="OnOpenViewerClick" />
+                            <Button Content="Open sync activity" Click="OnOpenSyncsClick" />
+                            <Button Content="Open settings" Click="OnOpenSettingsClick" />
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Border>
+
+            <Grid Grid.Row="1" ColumnSpacing="16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Border Style="{StaticResource MetricCardBorderStyle}">
+                    <StackPanel Spacing="6">
+                        <TextBlock Style="{StaticResource SectionCaptionTextStyle}" Text="Archive profiles" />
+                        <TextBlock FontSize="22" FontWeight="SemiBold" Text="{x:Bind ViewModel.ProfileStatusText, Mode=OneWay}" />
+                        <TextBlock Style="{StaticResource SectionCaptionTextStyle}" Text="{x:Bind ViewModel.ArchiveProfileBreakdownText, Mode=OneWay}" />
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="1" Style="{StaticResource MetricCardBorderStyle}">
+                    <StackPanel Spacing="6">
+                        <TextBlock Style="{StaticResource SectionCaptionTextStyle}" Text="API access" />
+                        <TextBlock FontSize="22" FontWeight="SemiBold" Text="{x:Bind ViewModel.CredentialStatusText, Mode=OneWay}" TextWrapping="WrapWholeWords" />
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="2" Style="{StaticResource MetricCardBorderStyle}">
+                    <StackPanel Spacing="6">
+                        <TextBlock Style="{StaticResource SectionCaptionTextStyle}" Text="Web capture session" />
+                        <TextBlock FontSize="22" FontWeight="SemiBold" Text="{x:Bind ViewModel.ScraperStatusText, Mode=OneWay}" TextWrapping="WrapWholeWords" />
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="3" Style="{StaticResource MetricCardBorderStyle}">
+                    <StackPanel Spacing="6">
+                        <TextBlock Style="{StaticResource SectionCaptionTextStyle}" Text="Sync activity" />
+                        <TextBlock FontSize="22" FontWeight="SemiBold" Text="{x:Bind ViewModel.SyncStatusText, Mode=OneWay}" TextWrapping="WrapWholeWords" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <Grid Grid.Row="2" ColumnSpacing="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Border Style="{StaticResource ContentCardBorderStyle}">
+                    <StackPanel Spacing="16">
+                        <TextBlock Style="{StaticResource SectionHeaderTextStyle}" Text="Recommended workflow" />
+                        <StackPanel Spacing="10">
+                            <Border Style="{StaticResource SecondaryContentCardBorderStyle}">
+                                <StackPanel Spacing="6">
+                                    <TextBlock FontWeight="SemiBold" Text="1. Save access and choose a source" />
+                                    <TextBlock Style="{StaticResource SectionCaptionTextStyle}" Text="Set your X API credential in Settings, then create a saved archive profile and pick API sync or web capture." />
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{StaticResource SecondaryContentCardBorderStyle}">
+                                <StackPanel Spacing="6">
+                                    <TextBlock FontWeight="SemiBold" Text="2. Review or capture" />
+                                    <TextBlock Style="{StaticResource SectionCaptionTextStyle}" Text="API profiles can review recent posts inline before archive. Web capture profiles open the guided fallback page." />
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{StaticResource SecondaryContentCardBorderStyle}">
+                                <StackPanel Spacing="6">
+                                    <TextBlock FontWeight="SemiBold" Text="3. Track and browse" />
+                                    <TextBlock Style="{StaticResource SectionCaptionTextStyle}" Text="Use Sync Activity for API runs and Archive Viewer for the final local archive, regardless of source." />
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="1" Style="{StaticResource ContentCardBorderStyle}">
+                    <StackPanel Spacing="16">
+                        <TextBlock Style="{StaticResource SectionHeaderTextStyle}" Text="What this app stores" />
+                        <TextBlock
+                            Style="{StaticResource SectionCaptionTextStyle}"
+                            Text="Archives stay on your machine in the folder you choose. The app keeps post text, media, metadata, and the local viewer index together so the archive remains portable." />
+                        <TextBlock Style="{StaticResource StatusTextBlockStyle}" Text="{x:Bind ViewModel.StatusMessage, Mode=OneWay}" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</Page>
